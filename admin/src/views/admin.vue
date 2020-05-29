@@ -407,7 +407,7 @@
                       <div class="row">
                           <div class="col-xs-12">
                               <!--子组件-->
-                               <router-view>Welcome</router-view>
+                               <router-view></router-view>
                               <!-- PAGE CONTENT ENDS -->
                           </div><!-- /.col -->
                       </div><!-- /.row -->
