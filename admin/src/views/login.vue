@@ -152,7 +152,7 @@
     export default {
         name:'login',
         mounted:function(){//mounted初始化方法
-            $('body').removeClass('on-skin');
+            $('body').removeClass('no-skin');
             $('body').attr('class', 'login-layout light-login');
 
 

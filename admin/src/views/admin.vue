@@ -455,7 +455,7 @@
         name:'admin',
         mounted:function(){//mounted初始化方法
             $("body").removeClass('login-layout light-login');
-            $("body").attr('class', 'on-skin');
+            $("body").attr('class', 'no-skin');
 
         }
 
