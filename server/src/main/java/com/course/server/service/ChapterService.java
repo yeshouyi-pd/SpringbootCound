@@ -5,6 +5,7 @@ import com.course.server.domain.ChapterExample;
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.ChapterMapper;
+import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -31,12 +32,7 @@ public class ChapterService {
         example.setOrderByClause(" id  desc ");
         List<ChapterDto> list = new ArrayList<ChapterDto>();
         if (null != listChapter && listChapter.size() > 0) {
-            for (Chapter vo : listChapter) {
-                ChapterDto chapterDto = new ChapterDto();
-                BeanUtils.copyProperties(vo, chapterDto);
-                list.add(chapterDto);
-
-            }
+            list =    CopyUtil.copyList(listChapter ,ChapterDto.class);
             pageDto.setList(list);
 
         }
@@ -50,9 +46,9 @@ public class ChapterService {
      * @return
      */
     public  int  save(ChapterDto chapterDto){
-         Chapter  chapter = new Chapter();
-         BeanUtils.copyProperties(chapterDto, chapter);
-         chapter.setId(UuidUtil.getShortUuid());
+          chapterDto.setId(UuidUtil.getShortUuid());
+          Chapter  chapter =  CopyUtil.copy(chapterDto,Chapter.class);
+
          return  chapterMapper.insertSelective(chapter);
     }
 }
