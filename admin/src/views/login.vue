@@ -159,7 +159,7 @@
         },
         methods:{
             login(){//push跳转到某一个地址
-                this.$router.push("/admin")
+                this.$router.push("/welcome")
             }
         }
 
