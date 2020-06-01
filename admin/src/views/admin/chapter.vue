@@ -6,6 +6,7 @@
             刷新
         </button>
         </p>
+        <pagination  ref="pagination" v-bind:list="list"></pagination>
         <table id="simple-table" class="table  table-bordered table-hover">
             <thead>
             <tr>
@@ -86,8 +87,10 @@
     </div>
 </template>
 <script>
+    import Pagination from "../../components/pagination";
     export default {
         name:'chapter',
+        components: {Pagination},
         data:function(){
           return{
               chapters:[]
@@ -96,19 +99,20 @@
         mounted:function(){//mounted初始化方法
             //this.$parent.activeSidebae("business-chapter-sidebar");
             let _this = this;
-            _this.list();//页面初始化执行
+            _this.list(1);//页面初始化执行
 
         },
         methods:{
-           list(){
+           list(page){
                let _this = this;
                _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
-                   page:1,
-                   size:1
+                   page:page,
+                   size:_this.$refs.pagination.size,
                })
                    .then((respones)=>{
                        console.log("查询大章结果：", respones);
                        _this.chapters = respones.data.list;
+                       _this.$refs.pagination.render(page,respones.data.total)
                    })
            }
         }

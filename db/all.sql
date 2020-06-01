@@ -7,6 +7,18 @@ create  table  `chapter`(
  primary  key  (`id`)
 ) engine=innodb default  charset=utf8mb4 comment='大章';
 
-insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('1', '1', '语文');
-insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('2', '2', '数学 ');
-insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('3', '4', '英语');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('5', '5', '语文');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('6', '6', '数学 ');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('7', '7', '英语');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('8', '8', '语文');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('9', '9', '数学 ');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('10', '10', '英语');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('11', '11', '语文');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('12', '12', '数学 ');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('13', '13', '英语');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('14', '14', '语文');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('15', '15', '数学 ');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('16', '16', '英语');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('17', '17', '语文');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('18', '18', '数学 ');
+insert into `course`.`chapter` (`id`, `course_id`, `name`) values ('19', '19', '英语');
