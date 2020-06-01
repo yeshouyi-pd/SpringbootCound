@@ -995,7 +995,7 @@
     export default {
         name:'chapter',
         mounted:function(){//mounted初始化方法
-            this.$parent.activeSidebae("business-chapter-sidebar");
+            //this.$parent.activeSidebae("business-chapter-sidebar");
         }
 
     }

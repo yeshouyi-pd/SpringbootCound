@@ -477,9 +477,21 @@
     export default {
         name:'admin',
         mounted:function(){//mounted初始化方法
+            let _this = this; //this 变成本地变量  避坑
             $("body").removeClass('login-layout light-login');
             $("body").attr('class', 'no-skin');
-
+            //要是直接链接跳转 watch 可能监听不到  如直接冲login跳到welcome.所以初始化也添加一个
+            _this.activeSidebae(_this.$route.name.replace("/","-")+"-sidebar");
+        },
+        watch:{//监听
+            $route:{//监听路由变化 跳转的是 /  只对/  mane 为admin 下的所有只路由有效
+                handler:function (val, oldVal) {
+                    let _this = this;
+                    _this.$nextTick(function () {//页面加载完后执行
+                       _this.activeSidebae(_this.$route.name.replace("/","-")+"-sidebar");
+                    })
+                }
+            }
         },
         methods:{
             activeSidebae:function (id) {

@@ -9,7 +9,7 @@
         name:'welcome',
         mounted:function(){//mounted初始化方法
             // this.$parent 调用父组件
-           this.$parent.activeSidebae("welcome-sidebar");
+        //   this.$parent.activeSidebae("welcome-sidebar");
         }
 
     }

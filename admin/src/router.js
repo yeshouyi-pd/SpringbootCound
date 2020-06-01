@@ -19,7 +19,7 @@ export default new Router({
         component:Login
     },{
         path: "/",
-        name:"admin",//为每一个理由都加上name属性，后续做通用的aidebar激活方法样式会用的
+        name:"admin",//为每一个路由都加上name属性，后续做通用的aidebar激活方法样式会用的
         component:Admin,
         children:[{
             path: "welcome",
