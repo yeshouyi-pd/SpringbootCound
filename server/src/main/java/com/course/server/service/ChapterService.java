@@ -49,11 +49,16 @@ public class ChapterService {
     public  void  save(ChapterDto chapterDto){
         Chapter  chapter =  CopyUtil.copy(chapterDto,Chapter.class);
         if(StringUtils.isEmpty(chapterDto.getId())){
-            chapterDto.setId(UuidUtil.getShortUuid());
+            chapter.setId(UuidUtil.getShortUuid());
             chapterMapper.insertSelective(chapter);
         }else{
             chapterMapper.updateByPrimaryKeySelective(chapter);
         }
+
+    }
+
+    public  void  delete (String id){
+        chapterMapper.deleteByPrimaryKey(id);
 
     }
 

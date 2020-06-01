@@ -8,6 +8,7 @@ import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,12 @@ public class BusinessController {
         responseDto.setContent(chapterDto);
         return responseDto;
     }
-
+    @RequestMapping("/delete/{id}")
+    public ResponseDto  delete(@PathVariable String  id){
+        ResponseDto responseDto = new ResponseDto();
+        chapterService.delete(id);
+        return responseDto;
+    }
 
 
 

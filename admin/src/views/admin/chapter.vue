@@ -37,7 +37,7 @@
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
 
-                        <button class="btn btn-xs btn-danger">
+                        <button @click="del(chapter.id)" class="btn btn-xs btn-danger">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                         </button>
 
@@ -125,6 +125,16 @@
                 $("#from-modal").modal("show");//点开模态框
             },
 
+            del(id){
+                let _this = this;
+                _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((respones)=>{
+                    console.log("保存大章结果：", respones);
+                    let resp = respones.data;
+                    if(resp.success){
+                        _this.list(1);
+                    }
+                })
+            },
             list(page){
                let _this = this;
                _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
