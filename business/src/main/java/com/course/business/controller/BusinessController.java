@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/admin/chapter")
 public class BusinessController {
 
     @Autowired
@@ -23,7 +24,7 @@ public class BusinessController {
      * 查询
      * @return
      */
-    @RequestMapping("/query")
+    @RequestMapping("/list")
     public List<ChapterDto> query(){
         ChapterExample example = new ChapterExample();
         ChapterExample.Criteria ca = example.createCriteria();

@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router"
-import Router from "vue-router";
+import axios from "axios";
 
 Vue.config.productionTip = false
+Vue.prototype.$ajax = axios;//添加内置熟悉 Vue.prototype.xx 全局变量
 
 new Vue({
     router,//需要加载router路由配置

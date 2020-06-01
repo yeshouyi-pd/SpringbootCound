@@ -996,6 +996,18 @@
         name:'chapter',
         mounted:function(){//mounted初始化方法
             //this.$parent.activeSidebae("business-chapter-sidebar");
+            let _this = this;
+            _this.list();//页面初始化执行
+
+        },
+        methods:{
+           list(){
+               let _this = this;
+               _this.$ajax.get('http://127.0.0.1:9000/business/admin/chapter/list')
+                   .then((respones)=>{
+                       console.log("查询大章结果：", respones);
+                   })
+           }
         }
 
     }
