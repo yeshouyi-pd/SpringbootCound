@@ -5,6 +5,7 @@ import com.course.server.domain.ChapterExample;
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.ChapterMapper;
+import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -40,6 +41,19 @@ public class ChapterService {
 
         }
         return  pageDto;
+    }
+
+
+    /**
+     添加
+     * @param chapterDto
+     * @return
+     */
+    public  int  save(ChapterDto chapterDto){
+         Chapter  chapter = new Chapter();
+         BeanUtils.copyProperties(chapterDto, chapter);
+         chapter.setId(UuidUtil.getShortUuid());
+         return  chapterMapper.insertSelective(chapter);
     }
 }
 
