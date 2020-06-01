@@ -127,6 +127,7 @@
 
             del(id){
                 let _this = this;
+
                 Swal.fire({
                     title: '确认删除?',
                     text: "请谨慎操作!",
@@ -137,16 +138,14 @@
                     confirmButtonText: '删除'
                 }).then((result) => {
                     if (result.value) {
+                        Loading.show();
                         _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((respones)=>{
                             console.log("保存大章结果：", respones);
+                            Loading.hide();
                             let resp = respones.data;
                             if(resp.success){
                                 _this.list(1);
-                                Swal.fire(
-                                    '删除成功',
-                                    '删除成功',
-                                    'success'
-                                )
+                                toast.success("删除成功！")
                             }
                         })
 
@@ -155,26 +154,32 @@
             },
             list(page){
                let _this = this;
+                Loading.show();
                _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
                    page:page,
                    size:_this.$refs.pagination.size,
                })
                    .then((respones)=>{
+                       Loading.hide();
                        console.log("查询大章结果：", respones);
                       let resp = respones.data;
                        _this.chapters = resp.content.list;
                        _this.$refs.pagination.render(page,resp.content.total)
+
                    })
            },
             save(page){
                 let _this = this;
+                Loading.show();
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',
                     _this.chapter).then((respones)=>{
+                    Loading.hide();
                         console.log("保存大章结果：", respones);
                     let resp = respones.data;
                     if(resp.success){
                         $("#from-modal").modal("hide");//点开模态框
                         _this.list(1);
+                        toast.success("保存成功！")
                     }
                     })
             }
