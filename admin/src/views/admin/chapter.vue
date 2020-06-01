@@ -6,7 +6,7 @@
             刷新
         </button>
         </p>
-        <pagination  ref="pagination" v-bind:list="list"></pagination>
+        <pagination  ref="pagination" v-bind:list="list" v-bind:itemCount="8"></pagination>
         <table id="simple-table" class="table  table-bordered table-hover">
             <thead>
             <tr>
