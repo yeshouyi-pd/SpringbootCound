@@ -127,29 +127,17 @@
 
             del(id){
                 let _this = this;
-
-                Swal.fire({
-                    title: '确认删除?',
-                    text: "请谨慎操作!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '删除'
-                }).then((result) => {
-                    if (result.value) {
-                        Loading.show();
-                        _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((respones)=>{
-                            console.log("保存大章结果：", respones);
-                            Loading.hide();
-                            let resp = respones.data;
-                            if(resp.success){
-                                _this.list(1);
-                                toast.success("删除成功！")
-                            }
-                        })
-
-                    }
+                Confirm.show("请谨慎操作!",function () {
+                    Loading.show();
+                    _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((respones)=>{
+                        console.log("保存大章结果：", respones);
+                        Loading.hide();
+                        let resp = respones.data;
+                        if(resp.success){
+                            _this.list(1);
+                            Toast.success("删除成功！")
+                        }
+                    })
                 })
             },
             list(page){
@@ -179,7 +167,7 @@
                     if(resp.success){
                         $("#from-modal").modal("hide");//点开模态框
                         _this.list(1);
-                        toast.success("保存成功！")
+                        Toast.success("保存成功！")
                     }
                     })
             }
