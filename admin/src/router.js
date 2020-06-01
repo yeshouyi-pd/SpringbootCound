@@ -14,6 +14,7 @@ export default new Router({
         path: '*',
         redirect: "/login",
     },{
+
         path: '/login',
         component:Login
     },{
@@ -23,7 +24,7 @@ export default new Router({
             path: 'welcome',
             component:Welcome
         },{
-            path: 'chapter',
+            path: 'business/chapter',
             component:Chapter
         }]
     }]

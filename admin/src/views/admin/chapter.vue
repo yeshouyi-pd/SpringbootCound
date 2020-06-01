@@ -1,5 +1,4 @@
 <template>
-    <div>
         <table id="simple-table" class="table  table-bordered table-hover">
             <thead>
             <tr>
@@ -991,6 +990,14 @@
             </tr>
             </tbody>
         </table>
-
-    </div>
 </template>
+<script>
+    export default {
+        name:'chapter',
+        mounted:function(){//mounted初始化方法
+            this.$parent.activeSidebae("business-chapter-sidebar");
+        }
+
+    }
+
+</script>
