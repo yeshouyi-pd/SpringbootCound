@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +46,18 @@ public class ChapterService {
      * @param chapterDto
      * @return
      */
-    public  int  save(ChapterDto chapterDto){
-          chapterDto.setId(UuidUtil.getShortUuid());
-          Chapter  chapter =  CopyUtil.copy(chapterDto,Chapter.class);
+    public  void  save(ChapterDto chapterDto){
+        Chapter  chapter =  CopyUtil.copy(chapterDto,Chapter.class);
+        if(StringUtils.isEmpty(chapterDto.getId())){
+            chapterDto.setId(UuidUtil.getShortUuid());
+            chapterMapper.insertSelective(chapter);
+        }else{
+            chapterMapper.updateByPrimaryKeySelective(chapter);
+        }
 
-         return  chapterMapper.insertSelective(chapter);
     }
+
+
 }
 
 

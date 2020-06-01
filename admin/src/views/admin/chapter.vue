@@ -31,11 +31,9 @@
 
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
-                        <button class="btn btn-xs btn-success">
-                            <i class="ace-icon fa fa-check bigger-120"></i>
-                        </button>
 
-                        <button class="btn btn-xs btn-info">
+
+                        <button @click="edit(chapter)" class="btn btn-xs btn-info">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
 
@@ -43,9 +41,6 @@
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                         </button>
 
-                        <button class="btn btn-xs btn-warning">
-                            <i class="ace-icon fa fa-flag bigger-120"></i>
-                        </button>
                     </div>
 
                     <div class="hidden-md hidden-lg">
@@ -55,31 +50,6 @@
                                 <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
                             </button>
 
-                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																			<span class="blue">
-																				<i class="ace-icon fa fa-search-plus bigger-120"></i>
-																			</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																			<span class="green">
-																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																			</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																			<span class="red">
-																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																			</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </td>
@@ -102,7 +72,7 @@
                             <div class="form-group">
                                 <label  class="col-sm-2 control-label">名称</label>
                                 <div class="col-sm-10">
-                                    <input   v-model="chapter.name" type="text" class="form-control"  >
+                                    <input     v-model="chapter.name" type="text" class="form-control"  >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -141,10 +111,19 @@
 
         },
         methods:{
-        add(){
-            let _this = this;
-            $("#from-modal").modal("show");//点开模态框
-         },
+            add(){
+              let _this = this;
+                this.chapter={};
+              $("#from-modal").modal("show");//点开模态框
+            },
+
+            edit(chapter){
+                let _this = this;
+                // this.chapter=chapter;
+                //解决VUE双向绑定的问题
+                this.chapter=$.extend({},chapter);
+                $("#from-modal").modal("show");//点开模态框
+            },
 
             list(page){
                let _this = this;
