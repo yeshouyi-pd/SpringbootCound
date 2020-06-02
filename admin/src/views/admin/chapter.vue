@@ -129,7 +129,7 @@
                 let _this = this;
                 Confirm.show("请谨慎操作!",function () {
                     Loading.show();
-                    _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((respones)=>{
+                    _this.$ajax.delete(process.env.VUE_APP_SERVER +'/business/admin/chapter/delete/'+id).then((respones)=>{
                         console.log("保存大章结果：", respones);
                         Loading.hide();
                         let resp = respones.data;
@@ -143,7 +143,7 @@
             list(page){
                let _this = this;
                 Loading.show();
-               _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
+               _this.$ajax.post(process.env.VUE_APP_SERVER +'/business/admin/chapter/list',{
                    page:page,
                    size:_this.$refs.pagination.size,
                })
@@ -165,7 +165,7 @@
                     return;
                 }
                 Loading.show();
-                _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',
+                _this.$ajax.post(process.env.VUE_APP_SERVER +'/business/admin/chapter/save',
                     _this.chapter).then((respones)=>{
                     Loading.hide();
                         console.log("保存大章结果：", respones);
