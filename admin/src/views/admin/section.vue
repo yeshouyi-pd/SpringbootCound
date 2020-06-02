@@ -39,7 +39,7 @@
         <td>{{section.chapterId}}</td>
         <td>{{section.video}}</td>
         <td>{{section.time}}</td>
-        <td>{{SECTION_CHARGE | optionKV(section.charge)}}</td>
+        <td>{{section.charge}}</td>
         <td>{{section.sort}}</td>
         <td>{{section.createdAt}}</td>
         <td>{{section.updatedAt}}</td>
@@ -66,6 +66,12 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
+                 <div class="form-group">
+                    <label class="col-sm-2 control-label">ID</label>
+                     <div class="col-sm-10">
+                       <input v-model="section.id" class="form-control">
+                     </div>
+                 </div>
                  <div class="form-group">
                     <label class="col-sm-2 control-label">标题</label>
                      <div class="col-sm-10">
@@ -99,9 +105,7 @@
                  <div class="form-group">
                     <label class="col-sm-2 control-label">收费</label>
                      <div class="col-sm-10">
-                         <select  v-model="section.charge"  class="form-control">
-                             <option v-for="o in SECTION_CHARGE" v-bind:value="o.key">{{o.value}}</option>
-                         </select>
+                       <input v-model="section.charge" class="form-control">
                      </div>
                  </div>
                  <div class="form-group">
@@ -138,12 +142,11 @@
   import Pagination from "../../components/pagination";
   export default {
     components: {Pagination},
-    name: "section",
+    name: "business-section",
     data:function(){
       return{
       section:{},
-      sections:[],
-       SECTION_CHARGE:SECTION_CHARGE,
+      sections:[]
       }
     },
     mounted: function() {
