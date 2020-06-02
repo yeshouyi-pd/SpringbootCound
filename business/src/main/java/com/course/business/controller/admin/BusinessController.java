@@ -24,7 +24,7 @@ public class BusinessController {
 
     @Autowired
     private ChapterService chapterService;
-
+    public static final String BUSINESS_NAME = "大章";
 
     /**
      * 查询
