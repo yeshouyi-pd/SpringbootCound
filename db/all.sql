@@ -40,3 +40,27 @@ CREATE TABLE `course`.`section`(
 
 INSERT INTO section (`id`, `title`, `course_id`, `chapter_id`, `video`, `time`, `charge`, `sort`, `created_at`, `updated_at` )
 VALUES ( '00000001','测试小节01','00000001','000000', '',500, 'F', 1, now(), now());
+
+-------
+
+CREATE TABLE `course`.`course`(
+  `id` CHAR(8) NOT NULL COMMENT 'id',
+  `name` VARCHAR(50) NOT NULL COMMENT '名称',
+  `summary` VARCHAR(2000) COMMENT '概述',
+  `time` INT COMMENT '时长|单位秒',
+  `price` DECIMAL(8,2) COMMENT '价格(元)',
+  `image` VARCHAR(100) COMMENT '封面',
+  `level` CHAR(1) COMMENT '级别| ONE(\"1\",\"初级\"),TWO(\"2\",\"中级\"),THREE(\"3\",\"高级\")',
+  `charge` CHAR(1) COMMENT '收费| CHARGE(\"C\"，\"收费\"),FREE(\"F\",\"免费\")',
+  `status` CHAR(1) COMMENT '状态|PUBLISH(\"P\", \"发布\"),DRAFT(\"D\",\"草稿\")',
+  `enroll` INT DEFAULT 0 COMMENT '报名数',
+  `sort` INT COMMENT '顺序',
+  `created_at` DATETIME COMMENT '创建时间',
+  `updated_at` DATETIME COMMENT '修改时间\',
+  PRIMARY KEY (`id`)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE course COMMENT '课程'
+
+INSERT INTO course (id, NAME, summary, TIME, price, image, LEVEL, charge, STATUS, enroll, sort, created_at,updated_at)
+VALUES ('00000001','测试课程01', '这是一门测试课程',7200, 19.9, '', 0, 'C', 'D', 100, 0, NOW(), NOW());
