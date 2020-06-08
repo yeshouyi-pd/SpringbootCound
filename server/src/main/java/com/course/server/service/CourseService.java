@@ -5,6 +5,7 @@ import com.course.server.domain.CourseExample;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.CourseMapper;
+import com.course.server.mapper.my.MyCourseMapper;
 import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
@@ -20,7 +21,10 @@ import java.util.List;
 public class CourseService {
 
 @Resource
-private CourseMapper courseMapper;
+    private CourseMapper courseMapper;
+
+    @Resource
+    private MyCourseMapper myCourseMapper;
 
 /**
 * 列表查询
@@ -72,5 +76,9 @@ List<CourseDto> courseDtoList = CopyUtil.copyList(courseList, CourseDto.class);
     */
     public void delete(String id) {
     courseMapper.deleteByPrimaryKey(id);
+    }
+
+    public void  updateTime(String courseId){
+        myCourseMapper.updateTime(courseId);
     }
     }
