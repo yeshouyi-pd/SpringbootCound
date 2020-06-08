@@ -27,7 +27,6 @@
             <tr>
                 <th >ID</th>
                 <th >名称</th>
-                <th>课程ID</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -36,20 +35,22 @@
             <tr v-for="chapter in chapters">
                 <td >{{chapter.id}}</td>
                 <td >{{chapter.name}}</td>
-                <td >{{chapter.courseId}}</td>
 
 
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
 
-
-                        <button @click="edit(chapter)" class="btn btn-xs btn-info">
-                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                        <button v-on:click="toSection(chapter)" class="btn btn-white btn-xs btn-info  btn-round">
+                            小节
                         </button>
 
-                        <button @click="del(chapter.id)" class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                        <button v-on:click="edit(chapter)" class="btn btn-white btn-xs btn-info btn-round">
+                            编辑
                         </button>
+                        <button v-on:click="del(chapter.id)" class="btn btn-white  btn-xs btn-danger btn-round">
+                            删除
+                        </button>
+
 
                     </div>
 
@@ -132,13 +133,17 @@
                 this.chapter={};
               $("#from-modal").modal("show");//点开模态框
             },
-
             edit(chapter){
                 let _this = this;
                 // this.chapter=chapter;
                 //解决VUE双向绑定的问题
                 this.chapter=$.extend({},chapter);
                 $("#from-modal").modal("show");//点开模态框
+            },
+            toSection(chapter){
+                let _this = this;
+                SessionStorage.set("chapter",chapter); //写入缓存
+                _this.$router.push("/business/section");
             },
 
             del(id){

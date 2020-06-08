@@ -1,5 +1,14 @@
 <template>
   <div>
+      <h3 class="lighter">
+          <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+          <router-link to="/business/course" data-toggle="modal" class="blue">{{course.name}}</router-link>
+          &nbsp;&nbsp;
+          <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+          <router-link to="/business/chapter" data-toggle="modal" class="blue">{{chapter.name}}</router-link>
+      </h3>
+
+      <div class="hr hr-18 hr-double dotted"></div>
     <p>
       <button v-on:click="add()" class="btn btn-white btn-default btn-round">
         <i class="ace-icon fa fa-edit"></i>
@@ -19,8 +28,6 @@
       <tr>
                     <th>ID</th>
             <th>标题</th>
-            <th>课程</th>
-            <th>大章</th>
             <th>视频</th>
             <th>时长</th>
             <th>收费</th>
@@ -33,8 +40,6 @@
       <tr v-for="section in sections">
               <td>{{section.id}}</td>
               <td>{{section.title}}</td>
-              <td>{{section.courseId}}</td>
-              <td>{{section.chapterId}}</td>
               <td>{{section.video}}</td>
               <td>{{section.time}}</td>
               <td>{{SECTION_CHARGE | optionKV(section.charge)}}</td>
@@ -71,13 +76,15 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">课程</label>
                       <div class="col-sm-10">
-                        <input v-model="section.courseId" class="form-control">
+                          <p class="form-control-static"> {{chapter.courseId}}</p>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label">大章</label>
                       <div class="col-sm-10">
-                        <input v-model="section.chapterId" class="form-control">
+
+                          <p class="form-control-static"> {{chapter.id}}</p>
+
                       </div>
                     </div>
                     <div class="form-group">
@@ -128,14 +135,22 @@
       section: {},
       sections: [],
       SECTION_CHARGE:SECTION_CHARGE,
+      course:{},
+      chapter: {}
     }
     },
     mounted: function() {
       let _this = this;
       _this.$refs.pagination.size = 5;
+        let  chapter = SessionStorage.get("chapter")|| {};
+        let  course = SessionStorage.get("course")|| {};
+        console.log(chapter);
+        if(Tool.isEmpty(chapter)){
+            _this.$router.push("/welcome");
+        }
+      _this.chapter =chapter;
+      _this.course =course;
       _this.list(1);
-      // sidebar激活样式方法一
-      // this.$parent.activeSidebar("business-section-sidebar");
 
     },
     methods: {
@@ -166,6 +181,8 @@
         _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/section/list', {
           page: page,
           size: _this.$refs.pagination.size,
+          courseId:_this.chapter.courseId,
+          chapterId:_this.chapter.id
         }).then((response)=>{
           Loading.hide();
           let resp = response.data;
@@ -180,7 +197,8 @@
        */
       save() {
         let _this = this;
-
+          _this.section.courseId=_this.chapter.courseId;
+          _this.section.chapterId=_this.chapter.id;
         // 保存校验
         if (1 != 1
                 || !Validator.length(_this.section.title, "标题", 1, 50)
