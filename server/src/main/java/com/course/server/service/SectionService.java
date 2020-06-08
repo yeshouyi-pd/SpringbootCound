@@ -11,9 +11,11 @@ import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.beans.Transient;
 import java.util.List;
         import java.util.Date;
 
@@ -50,6 +52,8 @@ public void list(SectionPageDto sectionPageDto) {
     /**
     * 保存，id有值时更新，无值时新增
     */
+    //@Transactional(rollbackFor = Exception.class) 支持Exception回滚
+    @Transactional
     public void save(SectionDto sectionDto) {
     Section section = CopyUtil.copy(sectionDto, Section.class);
     if (StringUtils.isEmpty(sectionDto.getId())) {
