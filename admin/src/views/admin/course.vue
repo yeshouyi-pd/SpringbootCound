@@ -46,6 +46,9 @@
                             <span class="badge badge-info">时长：{{course.time}}</span>
                         </p>
                         <p>
+                            <button v-on:click="toChapter(course)" class="btn btn-white btn-xs btn-info btn-round">
+                               大章
+                            </button>
                             <button v-on:click="edit(course)" class="btn btn-white btn-xs btn-info btn-round">
                                编辑
                             </button>
@@ -233,6 +236,14 @@
                 let _this = this;
                 _this.course = $.extend({}, course);
                 $("#form-modal").modal("show");
+            },
+            /**
+             * 点击【大章】
+             */
+            toChapter(course) {
+                let _this = this;
+                SessionStorage.set("course",course); //写入缓存
+                _this.$router.push("/business/chapter");
             },
 
             /**

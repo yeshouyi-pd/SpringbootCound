@@ -1,6 +1,13 @@
 <template>
     <div>
+        <h3>
+            {{course.name}}
+        </h3>
         <p>
+            <router-link to="/business/course" class="btn btn-white btn-default btn-round">
+                <i class="ace-icon fa fa-arrow-left "></i>
+                返回课程
+            </router-link>
             <button @click="add()" class="btn btn-white btn-default btn-round">
                 <i class="ace-icon fa fa-edit "></i>
                 新增
@@ -101,12 +108,18 @@
         data:function(){
           return{
               chapter:{},
-              chapters:[]
+              chapters:[],
+              course:{}
           }
         },
         mounted:function(){//mounted初始化方法
             //this.$parent.activeSidebae("business-chapter-sidebar");
             let _this = this;
+            let  course = SessionStorage.get("course")|| {};
+            if(Tool.isEmpty(course)){
+                _this.$router.push("/welcome");
+            }
+            _this.course = course;
             _this.list(1);//页面初始化执行
 
         },
