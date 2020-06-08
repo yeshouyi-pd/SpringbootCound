@@ -41,8 +41,8 @@
               <td>{{course.price}}</td>
               <td>{{course.image}}</td>
               <td>{{COURSE_LEVEL | optionKV(course.level) }}</td>
-              <td>{{course.charge}}</td>
-              <td>{{course.status}}</td>
+              <td>{{COURSE_CHARGE | optionKV(course.charge)}}</td>
+              <td>{{COURSE_STATUS | optionKV(course.status)}}</td>
               <td>{{course.enroll}}</td>
               <td>{{course.sort}}</td>
         <td>
@@ -109,13 +109,18 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">收费</label>
                       <div class="col-sm-10">
-                        <input v-model="course.charge" class="form-control">
+                          <select  v-model="course.charge"  class="form-control">
+                              <option v-for="o in COURSE_CHARGE" v-bind:value="o.key">{{o.value}}</option>
+                          </select>
+
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label">状态</label>
                       <div class="col-sm-10">
-                        <input v-model="course.status" class="form-control">
+                          <select  v-model="course.status"  class="form-control">
+                              <option v-for="o in COURSE_STATUS" v-bind:value="o.key">{{o.value}}</option>
+                          </select>
                       </div>
                     </div>
                     <div class="form-group">
