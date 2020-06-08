@@ -1,8 +1,11 @@
 <template>
     <div>
-        <h3>
-            {{course.name}}
+        <h3 class="lighter">
+            <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+            <router-link to="/business/course" data-toggle="modal" class="blue">{{course.name}}</router-link>
         </h3>
+
+        <div class="hr hr-18 hr-double dotted"></div>
         <p>
             <router-link to="/business/course" class="btn btn-white btn-default btn-round">
                 <i class="ace-icon fa fa-arrow-left "></i>
