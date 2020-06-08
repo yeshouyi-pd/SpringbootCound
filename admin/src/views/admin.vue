@@ -428,7 +428,15 @@
                           </router-link>
 
                           <b class="arrow"></b>
-                      </li>
+                          </li>
+                          <li class="active" id = "business-category-sidebar">
+                              <router-link to="/business/category">
+                                  <i class="menu-icon fa fa-caret-right"></i>
+                                  课程分类
+                              </router-link>
+
+                              <b class="arrow"></b>
+                          </li>
 
 
                       </ul>
