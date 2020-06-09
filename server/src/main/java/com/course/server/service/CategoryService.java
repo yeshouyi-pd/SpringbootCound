@@ -25,15 +25,15 @@ private CategoryMapper categoryMapper;
 * 列表查询
 */
 public void list(PageDto pageDto) {
-PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
-CategoryExample categoryExample = new CategoryExample();
-        categoryExample.setOrderByClause("sort asc");
-List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
-PageInfo<Category> pageInfo = new PageInfo<>(categoryList);
-pageDto.setTotal(pageInfo.getTotal());
-List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.class);
+    PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
+    CategoryExample categoryExample = new CategoryExample();
+    categoryExample.setOrderByClause("sort asc");
+    List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
+    PageInfo<Category> pageInfo = new PageInfo<>(categoryList);
+    pageDto.setTotal(pageInfo.getTotal());
+    List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.class);
     pageDto.setList(categoryDtoList);
-    }
+}
 
     /**
     * 保存，id有值时更新，无值时新增
@@ -67,5 +67,14 @@ List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.
     */
     public void delete(String id) {
     categoryMapper.deleteByPrimaryKey(id);
+    }
+
+
+    public List<CategoryDto> all() {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.setOrderByClause("sort asc");
+        List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
+        List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.class);
+        return categoryDtoList;
     }
     }
