@@ -171,6 +171,11 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-lg-12">
+                                  {{saveContentLabel}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
                                     <div id="content"></div>
                                 </div>
                             </div>
@@ -202,6 +207,7 @@
                 COURSE_STATUS: COURSE_STATUS,
                 categorys:[],
                 tree:{},
+                saveContentLabel:"",
             }
         },
         mounted: function () {
@@ -363,12 +369,13 @@
                 Loading.show();
                 let _this = this;
                 let id = course.id;
-                this.course =course;
+                _this.course =course;
                 $("#content").summernote({
                     focus:true,
                     height:300
                 });
                 //先清空历史 数据
+                _this.saveContentLabel="";
                 $("#content").summernote('code','');
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/listContent/'+id).then((response)=>{
                     Loading.hide();
@@ -380,6 +387,14 @@
                         if(resp.content){
                             $("#content").summernote('code',resp.content.content);
                         }
+
+                        let saveContentInterval =setInterval(function () {
+                            _this.saveContent();
+                        },5000);
+                        $('#course-content-modal').on('hidden.bs.modal',function(e){//关闭 模态框事件
+                            clearInterval(saveContentInterval);
+
+                        })
 
                     }else{
                         Toast.warning(resp.message);
@@ -398,7 +413,9 @@
                 }).then((response)=>{
                     let resp = response.data;
                     if(resp.success){
-                        Toast.success("内容保存成功");
+                        //Toast.success("内容保存成功");
+                        let  now =Tool.dateFormat("mm:ss")
+                        _this.saveContentLabel = "最后保存时间："+now;
                     }else{
                         Toast.warning("内容保存失败");
                     }
