@@ -25,6 +25,9 @@ public class CourseService {
 
     @Resource
     private MyCourseMapper myCourseMapper;
+    @Resource
+    private CourseCategoryService courseCategoryService;
+
 
 /**
 * 列表查询
@@ -43,6 +46,7 @@ List<CourseDto> courseDtoList = CopyUtil.copyList(courseList, CourseDto.class);
     /**
     * 保存，id有值时更新，无值时新增
     */
+
     public void save(CourseDto courseDto) {
     Course course = CopyUtil.copy(courseDto, Course.class);
     if (StringUtils.isEmpty(courseDto.getId())) {
@@ -50,6 +54,7 @@ List<CourseDto> courseDtoList = CopyUtil.copyList(courseList, CourseDto.class);
     } else {
     this.update(course);
     }
+        courseCategoryService.saveBatch(courseDto.getId(),courseDto.getCategoryDtos());
     }
 
     /**

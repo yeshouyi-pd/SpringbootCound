@@ -2,6 +2,8 @@ package com.course.server.dto;
 
         import java.math.BigDecimal;
         import java.util.Date;
+        import java.util.List;
+
         import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CourseDto {
@@ -72,6 +74,17 @@ public class CourseDto {
     */
         @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatedAt;
+
+    private List<CategoryDto>  categoryDtos;
+
+
+    public List<CategoryDto> getCategoryDtos() {
+        return categoryDtos;
+    }
+
+    public void setCategoryDtos(List<CategoryDto> categoryDtos) {
+        this.categoryDtos = categoryDtos;
+    }
 
     public String getId() {
     return id;
