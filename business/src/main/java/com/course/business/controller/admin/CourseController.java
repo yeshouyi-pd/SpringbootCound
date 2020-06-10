@@ -1,6 +1,7 @@
 package com.course.business.controller.admin;
 
 import com.course.server.domain.CourseCategory;
+import com.course.server.dto.CourseContentDto;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
@@ -70,4 +71,29 @@ public  ResponseDto listCategory(@PathVariable  String courseId){
     responseDto.setContent(list);
     return responseDto;
 }
+
+
+    /**
+     * 查询课程内容
+     * @param id
+     * @return
+     */
+    @PostMapping("/listContent/{id}")
+    public  ResponseDto listContent(@PathVariable  String id){
+        ResponseDto responseDto = new ResponseDto();
+        CourseContentDto courseContentDto  =courseService.queryById(id);
+        responseDto.setContent(courseContentDto);
+        return responseDto;
+    }
+
+    /**
+     * 保存课程内容
+     */
+    @PostMapping("/saveContent")
+    public ResponseDto saveContent(@RequestBody CourseContentDto courseContentDto){
+        ResponseDto responseDto = new ResponseDto();
+        courseService.insertContent(courseContentDto);
+        return responseDto;
+
+    }
 }
