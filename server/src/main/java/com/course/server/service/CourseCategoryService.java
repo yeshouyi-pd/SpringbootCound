@@ -12,6 +12,7 @@ import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -71,6 +72,7 @@ List<CourseCategoryDto> courseCategoryDtoList = CopyUtil.copyList(courseCategory
     }
 
 
+    @Transactional
     public  void  saveBatch(String id, List<CategoryDto> categorys){
         if(!StringUtils.isEmpty(id)){
             if(null != categorys && categorys.size() >0){
@@ -86,6 +88,13 @@ List<CourseCategoryDto> courseCategoryDtoList = CopyUtil.copyList(courseCategory
                 }
             }
         }
+    }
+
+
+    public List<CourseCategory> listByCourseCategory(String courseId){
+        CourseCategoryExample  axample = new CourseCategoryExample();
+        axample.createCriteria().andCourseIdEqualTo(courseId);
+        return  courseCategoryMapper.selectByExample(axample);
     }
 
     }
