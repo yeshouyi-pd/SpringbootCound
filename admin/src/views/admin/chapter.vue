@@ -117,7 +117,7 @@
           }
         },
         mounted:function(){//mounted初始化方法
-            //this.$parent.activeSidebae("business-chapter-sidebar");
+
             let _this = this;
             let  course = SessionStorage.get("course")|| {};
             if(Tool.isEmpty(course)){
@@ -125,7 +125,7 @@
             }
             _this.course = course;
             _this.list(1);//页面初始化执行
-
+            this.$parent.activeSidebae("business-course-sidebar");
         },
         methods:{
             add(){

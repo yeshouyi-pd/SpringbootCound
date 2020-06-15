@@ -151,6 +151,7 @@
       _this.chapter =chapter;
       _this.course =course;
       _this.list(1);
+        this.$parent.activeSidebae("business-course-sidebar");
 
     },
     methods: {
