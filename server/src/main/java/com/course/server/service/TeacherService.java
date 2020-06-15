@@ -67,4 +67,10 @@ List<TeacherDto> teacherDtoList = CopyUtil.copyList(teacherList, TeacherDto.clas
     public void delete(String id) {
     teacherMapper.deleteByPrimaryKey(id);
     }
+
+    public  List<TeacherDto> queryAll(){
+        List<Teacher> list   =   teacherMapper.selectByExample(null);
+        return CopyUtil.copyList(list,TeacherDto.class);
+
+    }
     }
