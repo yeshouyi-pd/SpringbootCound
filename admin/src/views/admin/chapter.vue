@@ -119,7 +119,7 @@
         mounted:function(){//mounted初始化方法
 
             let _this = this;
-            let  course = SessionStorage.get("course")|| {};
+            let  course = SessionStorage.get(SESSION_KEY_COURSE)|| {};
             if(Tool.isEmpty(course)){
                 _this.$router.push("/welcome");
             }
@@ -142,7 +142,7 @@
             },
             toSection(chapter){
                 let _this = this;
-                SessionStorage.set("chapter",chapter); //写入缓存
+                SessionStorage.set(SESSION_KEY_CHAPTER,chapter); //写入缓存
                 _this.$router.push("/business/section");
             },
 

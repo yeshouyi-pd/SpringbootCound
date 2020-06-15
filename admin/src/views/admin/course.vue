@@ -288,7 +288,7 @@
              */
             toChapter(course) {
                 let _this = this;
-                SessionStorage.set("course",course); //写入缓存
+                SessionStorage.set(SESSION_KEY_COURSE,course); //写入缓存
                 _this.$router.push("/business/chapter");
             },
 
