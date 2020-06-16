@@ -1,53 +1,62 @@
 package com.course.file.controller.admin;
 
+import com.course.server.dto.FileDto;
+import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
-import com.course.server.service.TeacherService;
-import com.course.server.util.UuidUtil;
+import com.course.server.service.FileService;
+import com.course.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/file")
 public class FileController {
-    private  static  final Logger LOG = LoggerFactory.getLogger(FileController.class);
-    public static final String BUSINESS_NAME = "文件上传";
-    @Value("${file.domain}")
-    private  String FILE_DOMAIN;
 
-    @Value("${file.path}")
-    private  String FILE_PATH;
-    @Resource
-    private TeacherService teacherService;
-    /**
-     * 上传
-     * @return
-     * //RequestParam 接受表单
-     */
-    @PostMapping("/upload")
-    public ResponseDto upload(@RequestParam MultipartFile file) throws IOException {
-        ResponseDto responseDto = new ResponseDto();
-        LOG.info("文件上传开始：{}",file);
-        LOG.info(file.getOriginalFilename());
-        LOG.info(String.valueOf(file.getSize()));
-        //保存本地文件
-        String fileName = file.getOriginalFilename();
-        String key = UuidUtil.getShortUuid();
-        String fullPath = FILE_PATH+"/teacher/"+key+"-"+fileName;
-        File dest = new File(fullPath);//生产目标路径
-        file.transferTo(dest);//将文件接入目标路径
-        LOG.info(dest.getAbsolutePath());
-        responseDto.setContent(FILE_DOMAIN+"/f/teacher/"+key+"-"+fileName);
-        return responseDto;
-    }
+private static final Logger LOG = LoggerFactory.getLogger(FileController.class);
+public static final String BUSINESS_NAME = "文件";
+
+@Resource
+private FileService fileService;
+
+/**
+* 列表查询
+*/
+@PostMapping("/list")
+public ResponseDto list(@RequestBody PageDto pageDto) {
+ResponseDto responseDto = new ResponseDto();
+fileService.list(pageDto);
+responseDto.setContent(pageDto);
+return responseDto;
+}
+
+/**
+* 保存，id有值时更新，无值时新增
+*/
+@PostMapping("/save")
+public ResponseDto save(@RequestBody FileDto fileDto) {
+// 保存校验
+            ValidatorUtil.require(fileDto.getPath(), "相对路径");
+            ValidatorUtil.length(fileDto.getPath(), "相对路径", 1, 100);
+            ValidatorUtil.length(fileDto.getName(), "文件名", 1, 100);
+            ValidatorUtil.length(fileDto.getSuffix(), "后缀", 1, 10);
+            ValidatorUtil.length(fileDto.getKey(), "文件标识", 1, 32);
+
+ResponseDto responseDto = new ResponseDto();
+fileService.save(fileDto);
+responseDto.setContent(fileDto);
+return responseDto;
+}
+
+/**
+* 删除
+*/
+@DeleteMapping("/delete/{id}")
+public ResponseDto delete(@PathVariable String id) {
+ResponseDto responseDto = new ResponseDto();
+fileService.delete(id);
+return responseDto;
+}
 }
