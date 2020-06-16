@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ControllerExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
-
+    public static final String BUSINESS_NAME = "文件上传";
     @ExceptionHandler(value = ValidatorException.class)
     @ResponseBody
     public ResponseDto validatorExceptionHandler(ValidatorException e) {
