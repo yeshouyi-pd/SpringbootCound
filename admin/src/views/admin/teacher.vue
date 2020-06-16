@@ -82,10 +82,15 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">头像</label>
                       <div class="col-sm-10">
-                        <input  type="file"  id="file-upload-input"  v-on:change="uploadImage()">
+                          <button type="button" v-on:click="selectImage()" class="btn btn-white btn-default btn-round">
+                              <i class="ace-icon fa fa-upload"></i>
+                              上传
+                          </button>
+
+                        <input   class="hidden" type="file"  id="file-upload-input"  v-on:change="uploadImage()">
                           <div v-show="teacher.image" class="row">
                               <div class="col-md-4">
-                        <img  v-bind:src="teacher.image" class="img-responsive">
+                                  <img  v-bind:src="teacher.image" class="img-responsive">
                               </div>
                           </div>
                       </div>
@@ -239,6 +244,10 @@
                 console.log("图像地址："+image)
                 _this.teacher.image = image;
             });
+
+        },
+        selectImage(){
+          $("#file-upload-input").trigger("click");
 
         }
     }
