@@ -40,6 +40,6 @@
                              type="XMLMAPPER" />
 
 
-        <table tableName="course" domainObjectName="Course"/>
+        <table tableName="file" domainObjectName="File"/>
     </context>
 </generatorConfiguration>

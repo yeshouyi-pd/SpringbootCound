@@ -429,6 +429,14 @@
 
                               <b class="arrow"></b>
                           </li>
+                          <li class="active" id = "business-file-sidebar">
+                              <router-link to="/business/file">
+                                  <i class="menu-icon fa fa-caret-right"></i>
+                                  文件管理
+                              </router-link>
+
+                              <b class="arrow"></b>
+                          </li>
 
                       </ul>
 
