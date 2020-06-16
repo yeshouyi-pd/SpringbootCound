@@ -17,8 +17,8 @@
       <div   class="col-md-3 center" v-for="teacher in teachers">
       <div>
 			<span class="profile-picture"  >
-                <img v-bind:title="teacher.intro"  v-show="!teacher.image" class="editable img-responsive editable-click editable-empty" alt="亚历克斯的头像"  src="/static/image/profile-pic.jpg" />
-                <img  v-bind:title="teacher.intro" v-show="teacher.image" class="editable img-responsive editable-click editable-empty" alt="亚历克斯的头像"  v-bind:src="teacher.image" />
+                <img v-bind:title="teacher.intro"  v-show="!teacher.image" class="editable img-responsive editable-click editable-empty"   src="/static/image/profile-pic.jpg" />
+                <img  v-bind:title="teacher.intro" v-show="teacher.image" class="editable img-responsive editable-click editable-empty"   v-bind:src="teacher.image" />
               </span>
 
           <div class="space-4"></div>
@@ -83,6 +83,11 @@
                       <label class="col-sm-2 control-label">头像</label>
                       <div class="col-sm-10">
                         <input  type="file"  id="file-upload-input"  v-on:change="uploadImage()">
+                          <div v-show="teacher.image" class="row">
+                              <div class="col-md-4">
+                        <img  v-bind:src="teacher.image" class="img-responsive">
+                              </div>
+                          </div>
                       </div>
                     </div>
                     <div class="form-group">
@@ -230,6 +235,9 @@
             _this.$ajax.post(process.env.VUE_APP_SERVER+'/file/admin/upload',formDate).then( (response)=> {
                 Loading.hide();
                 let resp = response.data;
+                let image = resp.content;
+                console.log("图像地址："+image)
+                _this.teacher.image = image;
             });
 
         }

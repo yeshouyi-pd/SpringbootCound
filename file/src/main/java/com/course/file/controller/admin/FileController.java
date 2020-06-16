@@ -5,6 +5,7 @@ import com.course.server.service.TeacherService;
 import com.course.server.util.UuidUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,12 @@ import java.io.IOException;
 @RequestMapping("/admin")
 public class FileController {
     private  static  final Logger LOG = LoggerFactory.getLogger(FileController.class);
+    public static final String BUSINESS_NAME = "文件上传";
+    @Value("${file.domain}")
+    private  String FILE_DOMAIN;
 
+    @Value("${file.path}")
+    private  String FILE_PATH;
     @Resource
     private TeacherService teacherService;
     /**
@@ -37,10 +43,11 @@ public class FileController {
         //保存本地文件
         String fileName = file.getOriginalFilename();
         String key = UuidUtil.getShortUuid();
-        String fullPath = "E:/file/teacher/"+key+"-"+fileName;
+        String fullPath = FILE_PATH+"/teacher/"+key+"-"+fileName;
         File dest = new File(fullPath);//生产目标路径
         file.transferTo(dest);//将文件接入目标路径
         LOG.info(dest.getAbsolutePath());
+        responseDto.setContent(FILE_DOMAIN+"/f/teacher/"+key+"-"+fileName);
         return responseDto;
     }
 }
