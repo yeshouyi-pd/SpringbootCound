@@ -82,12 +82,10 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">头像</label>
                       <div class="col-sm-10">
-                          <button type="button" v-on:click="selectImage()" class="btn btn-white btn-default btn-round">
-                              <i class="ace-icon fa fa-upload"></i>
-                              上传
-                          </button>
-
-                        <input   class="hidden" type="file" ref = "file"  id="file-upload-input"  v-on:change="uploadImage()">
+                        <file  v-bind:after-upload="afterUpload"
+                               v-bind:text="'上传图片'"
+                               v-bind:input-id="'image-upload'"
+                               v-bind:suffixs="['jpg','jpeg','png']"></file>
                           <div v-show="teacher.image" class="row">
                               <div class="col-md-4">
                                   <img  v-bind:src="teacher.image" class="img-responsive">
@@ -127,8 +125,9 @@
 
 <script>
   import Pagination from "../../components/pagination";
+  import File from "../../components/file";
   export default {
-    components: {Pagination},
+    components: {File, Pagination},
     name: "business-teacher",
     data: function() {
       return {
@@ -231,43 +230,10 @@
           })
         });
       },
-        uploadImage(){
-          let _this = this;
-          let formDate = new window.FormData();
-          //key :file 必须前后端参数名一致
-            let file = _this.$refs.file.files[0];//ref =file 别名
-            //_this.$refs.file.files[0] ==document.querySelector('#file-upload-input').files[0])
-            //
-            //判断文件格式
-            let suffixs = ["jpg","jpeg","png"];
-            let fileName =file.name;
-            let suffix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length).toLocaleLowerCase();
-            let validateSuffix =false;
-            for(let  i =0 ;i <suffixs.length;i++){
-                if(suffixs[i].toLocaleLowerCase()===suffix){
-                    validateSuffix=true;
-                    break;
-                }
-            }
-            if(! validateSuffix){
-                Toast.warning("文件格式不正确！只支持上传："+suffixs.join(","));
-                return;
-            }
-
-            formDate.append('file',document.querySelector('#file-upload-input').files[0]);
-            Loading.show();
-            _this.$ajax.post(process.env.VUE_APP_SERVER+'/file/admin/upload',formDate).then( (response)=> {
-                Loading.hide();
-                let resp = response.data;
-                let image = resp.content;
-                console.log("图像地址："+image)
-                _this.teacher.image = image;
-            });
-
-        },
-        selectImage(){
-          $("#file-upload-input").trigger("click");
-
+        afterUpload(resp){//回调主键方法
+             let _this = this;
+             let image = resp.content;
+              _this.teacher.image = image;
         }
     }
   }
