@@ -430,7 +430,7 @@
                               <b class="arrow"></b>
                           </li>
                           <li class="active" id = "business-file-sidebar">
-                              <router-link to="/business/file">
+                              <router-link to="/file/file">
                                   <i class="menu-icon fa fa-caret-right"></i>
                                   文件管理
                               </router-link>
@@ -466,8 +466,8 @@
               <div class="footer-inner">
                   <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Ace</span>
-							Application &copy; 2013-2014
+							<span class="blue bolder">叶</span>
+							Application &copy; 2020-2021
 						</span>
 
                       &nbsp; &nbsp;

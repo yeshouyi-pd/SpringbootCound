@@ -51,8 +51,8 @@ export default new Router({
             name:"business/teacher",
             component:Teacher
         },{
-            path: "business/file",
-            name:"business/file",
+            path: "file/file",
+            name:"file/file",
             component:File
         }]
     }]
