@@ -65,7 +65,8 @@ List<UserDto> userDtoList = CopyUtil.copyList(userList, UserDto.class);
     * 更新
     */
     private void update(User user) {
-    userMapper.updateByPrimaryKey(user);
+        user.setPassword(null);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
     /**
