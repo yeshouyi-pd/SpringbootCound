@@ -376,11 +376,11 @@
                       <b class="arrow"></b>
 
                       <ul class="submenu">
-                          <li class="">
-                              <a href="tables.html">
+                          <li class="active" id = "system-user-sidebar">
+                              <router-link to="/system/user">
                                   <i class="menu-icon fa fa-caret-right"></i>
-                                  用户管理
-                              </a>
+                                 用户管理
+                              </router-link>
 
                               <b class="arrow"></b>
                           </li>
