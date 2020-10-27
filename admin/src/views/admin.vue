@@ -506,6 +506,7 @@
             $("body").attr('class', 'no-skin');
             //要是直接链接跳转 watch 可能监听不到  如直接冲login跳到welcome.所以初始化也添加一个
             _this.activeSidebae(_this.$route.name.replace("/","-")+"-sidebar");
+            $.getScript('/ace/assets/js/ace.min.js');
         },
         watch:{//监听
             $route:{//监听路由变化 跳转的是 /  只对/  mane 为admin 下的所有只路由有效
