@@ -376,7 +376,7 @@
                       <b class="arrow"></b>
 
                       <ul class="submenu">
-                          <li class="active" id = "system-user-sidebar">
+                          <li class="" id = "system-user-sidebar">
                               <router-link to="/system/user">
                                   <i class="menu-icon fa fa-caret-right"></i>
                                  用户管理
@@ -395,7 +395,7 @@
                           </li>
                       </ul>
                   </li>
-                  <li class="active open">
+                  <li class="">
                       <a href="#" class="dropdown-toggle">
                           <i class="menu-icon fa fa-list"></i>
                           <span class="menu-text">业务管理</span>
@@ -405,7 +405,7 @@
 
                       <b class="arrow"></b>
                       <ul class="submenu">
-                          <li class="active" id = "business-category-sidebar">
+                          <li class="" id = "business-category-sidebar">
                               <router-link to="/business/category">
                                   <i class="menu-icon fa fa-caret-right"></i>
                                   分类管理
@@ -413,7 +413,7 @@
 
                               <b class="arrow"></b>
                           </li>
-                          <li class="active" id = "business-course-sidebar">
+                          <li class="" id = "business-course-sidebar">
                           <router-link to="/business/course">
                               <i class="menu-icon fa fa-caret-right"></i>
                               课程管理
@@ -421,7 +421,7 @@
 
                           <b class="arrow"></b>
                       </li>
-                          <li class="active" id = "business-teacher-sidebar">
+                          <li class="" id = "business-teacher-sidebar">
                               <router-link to="/business/teacher">
                                   <i class="menu-icon fa fa-caret-right"></i>
                                   讲师管理
@@ -429,7 +429,7 @@
 
                               <b class="arrow"></b>
                           </li>
-                          <li class="active" id = "business-file-sidebar">
+                          <li class="" id = "business-file-sidebar">
                               <router-link to="/file/file">
                                   <i class="menu-icon fa fa-caret-right"></i>
                                   文件管理
@@ -519,17 +519,17 @@
         },
         methods:{
             activeSidebae:function (id) {
-                //兄弟菜单去掉active样式，自身添加active样式
-                //siblings区到 兄弟节点
-                $("#"+id).siblings().removeClass("active");
-                $("#"+id).siblings().find("li").removeClass("active");
-                $("#"+id).addClass("active");
-                //如果有父菜单 父菜单的兄弟菜单去掉avtive open
-                //当前父菜单添加avtive open
-                var parentLi = $("#"+id).parents("li");
-                if (parentLi){
-                    parentLi.siblings().removeClass("active open");
-                    parentLi.addClass("active open");
+                // 兄弟菜单去掉active样式，自身增加active样式
+                $("#" + id).siblings().removeClass("active");
+                $("#" + id).siblings().find("li").removeClass("active");
+                $("#" + id).addClass("active");
+
+                // 如果有父菜单，父菜单的兄弟菜单去掉open active，父菜单增加open active
+                let parentLi = $("#" + id).parents("li");
+                if (parentLi) {
+                    parentLi.siblings().removeClass("open active");
+                    parentLi.siblings().find("li").removeClass("active");
+                    parentLi.addClass("open active");
                 }
             }
         }
