@@ -44,7 +44,7 @@
 
                                                 <div class="clearfix">
                                                     <label class="inline">
-                                                        <input type="checkbox" class="ace" />
+                                                        <input v-model="remember" type="checkbox" class="ace" />
                                                         <span class="lbl">记住我</span>
                                                     </label>
 
@@ -154,13 +154,18 @@
         data:function(){
             return{
                 user:{},
+                remember:true,
             }
         },
         mounted:function(){//mounted初始化方法
+            let _this = this;
             $('body').removeClass('no-skin');
             $('body').attr('class', 'login-layout light-login');
 
-
+            let   rememberUser =  LocalStorage.get(LOCAL_KEY_REMEMBER_USER)
+            if(rememberUser){
+                _this.user=rememberUser;
+            }
         },
         methods:{
             login(){//push跳转到某一个地址
@@ -174,6 +179,7 @@
                     return;
                 }
 
+                let  passwordShow = this.user.password
                 _this.user.password=hex_md5(_this.user.password +KEY);
                 Loading.show();
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/login', _this.user).then((response)=>{
@@ -182,6 +188,16 @@
                     if (resp.success) {
                         //Toast.success("保存成功！");
                         Tool.setLoginUser(resp.content);
+                        if(_this.remember){
+                            LocalStorage.set(LOCAL_KEY_REMEMBER_USER,{
+                                loginName : resp.content.loginName,
+                                password :passwordShow,
+                            });
+                        }else{
+                            LocalStorage.set(LOCAL_KEY_REMEMBER_USER,null);
+                        }
+
+
                         this.$router.push("/welcome")
                     } else {
                         _this.user.password=null;
