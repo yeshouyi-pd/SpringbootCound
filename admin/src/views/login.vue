@@ -184,6 +184,7 @@
                         Tool.setLoginUser(resp.content);
                         this.$router.push("/welcome")
                     } else {
+                        _this.user.password=null;
                         Toast.warning(resp.message)
                     }
                 })

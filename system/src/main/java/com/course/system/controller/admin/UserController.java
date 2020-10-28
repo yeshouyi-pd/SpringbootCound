@@ -1,10 +1,7 @@
 package com.course.system.controller.admin;
 
 import com.alibaba.fastjson.JSON;
-import com.course.server.dto.LoginUserDto;
-import com.course.server.dto.UserDto;
-import com.course.server.dto.PageDto;
-import com.course.server.dto.ResponseDto;
+import com.course.server.dto.*;
 import com.course.server.service.UserService;
 import com.course.server.util.UuidUtil;
 import com.course.server.util.ValidatorUtil;
@@ -77,7 +74,18 @@ return responseDto;
         userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         ResponseDto responseDto = new ResponseDto();
         LoginUserDto loginUserDto = userService.login(userDto);
+        request.getSession().setAttribute(Constants.LOGIN_USER,loginUserDto);
         responseDto.setContent(loginUserDto);
+        return responseDto;
+    }
+
+    /**
+     * 退出
+     */
+    @GetMapping("/logout")
+    public ResponseDto logout(HttpServletRequest request) {
+        ResponseDto responseDto = new ResponseDto();
+        request.getSession().setAttribute(Constants.LOGIN_USER,null);
         return responseDto;
     }
 }
