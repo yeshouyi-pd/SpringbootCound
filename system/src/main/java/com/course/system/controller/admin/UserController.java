@@ -7,6 +7,7 @@ import com.course.server.util.UuidUtil;
 import com.course.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public static final String BUSINESS_NAME = "用户";
 
 @Resource
 private UserService userService;
+
+@Resource
+public RedisTemplate redisTemplate;
 
 /**
 * 列表查询
@@ -71,9 +75,10 @@ return responseDto;
     @PostMapping("/login")
     public ResponseDto login(@RequestBody UserDto userDto, HttpServletRequest request) {
         LOG.info("用户登录开始");
-        String imageCode = (String) request.getSession().getAttribute(userDto.getImageCodeToken());
         ResponseDto responseDto = new ResponseDto();
-       // String imageCode = (String) redisTemplate.opsForValue().get(userDto.getImageCodeToken());
+          //String imageCode = (String) request.getSession().getAttribute(userDto.getImageCodeToken());
+
+        String imageCode = (String) redisTemplate.opsForValue().get(userDto.getImageCodeToken());
         LOG.info("从redis中获取到的验证码：{}", imageCode);
         if (StringUtils.isEmpty(imageCode)) {
             responseDto.setSuccess(false);
@@ -88,8 +93,8 @@ return responseDto;
             return responseDto;
         } else {
             // 验证通过后，移除验证码
-           request.getSession().removeAttribute(userDto.getImageCodeToken());
-           // redisTemplate.delete(userDto.getImageCodeToken());
+          // request.getSession().removeAttribute(userDto.getImageCodeToken());
+            redisTemplate.delete(userDto.getImageCodeToken());
         }
 
         userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
