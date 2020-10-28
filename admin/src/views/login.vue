@@ -95,6 +95,7 @@
             return{
                 user:{},
                 remember:true,
+                imageCodeToken: ""
             }
         },
         mounted:function(){//mounted初始化方法
@@ -118,6 +119,7 @@
                 if (1 != 1
                     || !Validator.require(_this.user.loginName, "登陆名")
                     || !Validator.require(_this.user.password, "密码")
+                    || !Validator.require(_this.user.imageCode, "验证码")
                 ) {
                     return;
                 }
@@ -128,6 +130,7 @@
                     _this.user.password=hex_md5(_this.user.password +KEY);
 
                 }
+                _this.user.imageCodeToken = _this.imageCodeToken;
                 Loading.show();
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/login', _this.user).then((response)=>{
                     Loading.hide();
@@ -149,7 +152,8 @@
 
                         this.$router.push("/welcome")
                     } else {
-                        _this.user.password=null;
+                        _this.user.password="";
+                        _this.loadImageCode();
                         Toast.warning(resp.message)
                     }
                 })

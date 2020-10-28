@@ -7,6 +7,8 @@ import filter from './filter/filter'
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios;//添加内置熟悉 Vue.prototype.xx 全局变量
 
+// 解决每次ajax请求，对应的sessionId不一致的问题
+axios.defaults.withCredentials = true;
 
 /**
  * axios拦截器

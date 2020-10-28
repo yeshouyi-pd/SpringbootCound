@@ -71,8 +71,29 @@ return responseDto;
     @PostMapping("/login")
     public ResponseDto login(@RequestBody UserDto userDto, HttpServletRequest request) {
         LOG.info("用户登录开始");
-        userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
+        String imageCode = (String) request.getSession().getAttribute(userDto.getImageCodeToken());
         ResponseDto responseDto = new ResponseDto();
+       // String imageCode = (String) redisTemplate.opsForValue().get(userDto.getImageCodeToken());
+        LOG.info("从redis中获取到的验证码：{}", imageCode);
+        if (StringUtils.isEmpty(imageCode)) {
+            responseDto.setSuccess(false);
+            responseDto.setMessage("验证码已过期");
+            LOG.info("用户登录失败，验证码已过期");
+            return responseDto;
+        }
+        if (!imageCode.toLowerCase().equals(userDto.getImageCode().toLowerCase())) {
+            responseDto.setSuccess(false);
+            responseDto.setMessage("验证码不对");
+            LOG.info("用户登录失败，验证码不对");
+            return responseDto;
+        } else {
+            // 验证通过后，移除验证码
+           request.getSession().removeAttribute(userDto.getImageCodeToken());
+           // redisTemplate.delete(userDto.getImageCodeToken());
+        }
+
+        userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
+
         LoginUserDto loginUserDto = userService.login(userDto);
         request.getSession().setAttribute(Constants.LOGIN_USER,loginUserDto);
         responseDto.setContent(loginUserDto);
