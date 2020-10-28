@@ -283,7 +283,7 @@
                               <img class="nav-user-photo" src="../../public/ace/assets/images/avatars/user.jpg" alt="Jason's Photo" />
                               <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									{{loginUser.name}}
 								</span>
 
                               <i class="ace-icon fa fa-caret-down"></i>
@@ -360,7 +360,7 @@
                       <!--router-link to  相当于a标签 路由-->
                       <router-link to="/welcome">
                           <i class="menu-icon fa fa-tachometer"></i>
-                          <span class="menu-text">欢迎</span>
+                          <span class="menu-text">欢迎:{{loginUser.name}}</span>
                       </router-link>
 
                       <b class="arrow"></b>
@@ -500,6 +500,11 @@
 <script>
     export default {
         name:'admin',
+        data:function(){
+            return{
+                loginUser:{},
+            }
+        },
         mounted:function(){//mounted初始化方法
             let _this = this; //this 变成本地变量  避坑
             $("body").removeClass('login-layout light-login');
@@ -507,6 +512,7 @@
             //要是直接链接跳转 watch 可能监听不到  如直接冲login跳到welcome.所以初始化也添加一个
             _this.activeSidebae(_this.$route.name.replace("/","-")+"-sidebar");
             $.getScript('/ace/assets/js/ace.min.js');
+            this.loginUser =Tool.getLoginUser();
         },
         watch:{//监听
             $route:{//监听路由变化 跳转的是 /  只对/  mane 为admin 下的所有只路由有效
