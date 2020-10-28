@@ -1,16 +1,22 @@
 package com.course.system.controller.admin;
 
+import com.alibaba.fastjson.JSON;
+import com.course.server.dto.LoginUserDto;
 import com.course.server.dto.UserDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.service.UserService;
+import com.course.server.util.UuidUtil;
 import com.course.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/admin/user")
@@ -61,4 +67,17 @@ ResponseDto responseDto = new ResponseDto();
 userService.delete(id);
 return responseDto;
 }
+
+    /**
+     * 登录
+     */
+    @PostMapping("/login")
+    public ResponseDto login(@RequestBody UserDto userDto, HttpServletRequest request) {
+        LOG.info("用户登录开始");
+        userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
+        ResponseDto responseDto = new ResponseDto();
+        LoginUserDto loginUserDto = userService.login(userDto);
+        responseDto.setContent(loginUserDto);
+        return responseDto;
+    }
 }
