@@ -15,6 +15,11 @@ axios.defaults.withCredentials = true;
  */
 axios.interceptors.request.use(function (config) {
     console.log("请求：", config);
+    let token = Tool.getLoginUser().token;
+    if (Tool.isNotEmpty(token)) {
+        config.headers.token = token;//所有的请求头加上token
+       // console.log("请求headers增加token:", token);
+    }
     return config;
 }, error => {});
 axios.interceptors.response.use(function (response) {
