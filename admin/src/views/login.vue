@@ -178,9 +178,13 @@
                 ) {
                     return;
                 }
+                let md5= hex_md5(this.user.password);
+                let   rememberUser =  LocalStorage.get(LOCAL_KEY_REMEMBER_USER) || {};
 
-                let  passwordShow = this.user.password
-                _this.user.password=hex_md5(_this.user.password +KEY);
+                if(md5 !== rememberUser.md5 ){
+                    _this.user.password=hex_md5(_this.user.password +KEY);
+
+                }
                 Loading.show();
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/login', _this.user).then((response)=>{
                     Loading.hide();
@@ -189,9 +193,11 @@
                         //Toast.success("保存成功！");
                         Tool.setLoginUser(resp.content);
                         if(_this.remember){
+                            let md5= hex_md5(this.user.password);
                             LocalStorage.set(LOCAL_KEY_REMEMBER_USER,{
                                 loginName : resp.content.loginName,
-                                password :passwordShow,
+                                password :_this.user.password,
+                                md5:md5
                             });
                         }else{
                             LocalStorage.set(LOCAL_KEY_REMEMBER_USER,null);
