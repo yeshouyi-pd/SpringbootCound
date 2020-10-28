@@ -39,7 +39,16 @@
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                                 </label>
-
+                                                <label class="block clearfix">
+                                                     <span class="block input-icon input-icon-right">
+                                                      <div class="input-group">
+                                                       <input v-model="user.imageCode" type="text" class="form-control" placeholder="验证码">
+                                                        <span class="input-group-addon" id="basic-addon2">
+                                                      <img v-on:click="loadImageCode()" id="image-code" alt="验证码"/>
+                                                            </span>
+                                                      </div>
+                                                     </span>
+                                                </label>
                                                 <div class="space"></div>
 
                                                 <div class="clearfix">
@@ -70,75 +79,6 @@
                                 </div><!-- /.widget-body -->
                             </div><!-- /.login-box -->
 
-
-                            <div id="signup-box" class="signup-box widget-box no-border">
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        <h4 class="header green lighter bigger">
-                                            <i class="ace-icon fa fa-users blue"></i>
-                                            New User Registration
-                                        </h4>
-
-                                        <div class="space-6"></div>
-                                        <p> Enter your details to begin: </p>
-
-                                        <form>
-                                            <fieldset>
-                                                <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-                                                </label>
-
-                                                <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-                                                </label>
-
-                                                <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                                </label>
-
-                                                <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Repeat password" />
-															<i class="ace-icon fa fa-retweet"></i>
-														</span>
-                                                </label>
-
-                                                <label class="block">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl">
-															I accept the
-															<a href="#">User Agreement</a>
-														</span>
-                                                </label>
-
-                                                <div class="space-24"></div>
-
-                                                <div class="clearfix">
-                                                    <button type="reset" class="width-30 pull-left btn btn-sm">
-                                                        <i class="ace-icon fa fa-refresh"></i>
-                                                        <span class="bigger-110">Reset</span>
-                                                    </button>
-
-                                                    <button type="button" class="width-65 pull-right btn btn-sm btn-success">
-                                                        <span class="bigger-110">Register</span>
-
-                                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                    </button>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div><!-- /.widget-body -->
-                            </div><!-- /.signup-box -->
                         </div><!-- /.position-relative -->
                     </div>
                 </div><!-- /.col -->
@@ -166,6 +106,9 @@
             if(rememberUser){
                 _this.user=rememberUser;
             }
+
+            // 初始时加载一次验证码图片
+            _this.loadImageCode();
         },
         methods:{
             login(){//push跳转到某一个地址
@@ -211,11 +154,22 @@
                     }
                 })
 
-            }
+            },
+            /**
+             * 加载图形验证码
+             */
+            loadImageCode: function () {
+                let _this = this;
+                _this.imageCodeToken = Tool.uuid(8);
+                $('#image-code').attr('src', process.env.VUE_APP_SERVER + '/system/admin/kaptcha/image-code/' + _this.imageCodeToken);
+            },
         }
 
     }
 </script>
 
-<style>
+<style scoped>
+    .input-group-addon {
+        padding: 0;
+    }
 </style>
