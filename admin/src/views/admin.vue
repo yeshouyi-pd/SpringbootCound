@@ -547,7 +547,7 @@
                     let resp = response.data;
                     if (resp.success) {
                         //Toast.success("保存成功！");
-                        Tool.setLoginUser(null);
+                         Tool.setLoginUser(null);
                         _this.$router.push("/login")
                     } else {
                         Toast.warning(resp.message)

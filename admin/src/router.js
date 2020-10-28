@@ -29,6 +29,9 @@ export default new Router({
         path: "/",
         name:"admin",//为每一个路由都加上name属性，后续做通用的aidebar激活方法样式会用的
         component:Admin,
+        meta: {//前端登录拦截 属性自定义
+            loginRequire: true
+        },
         children:[{
             path: "welcome",
             name:"welcome",
