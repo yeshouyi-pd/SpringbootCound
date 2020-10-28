@@ -100,7 +100,10 @@ return responseDto;
         userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
 
         LoginUserDto loginUserDto = userService.login(userDto);
-        request.getSession().setAttribute(Constants.LOGIN_USER,loginUserDto);
+        String token = UuidUtil.getShortUuid();
+        loginUserDto.setToken(token);
+        redisTemplate.opsForValue().set(token, JSON.toJSONString(loginUserDto), 3600, TimeUnit.SECONDS);
+        //request.getSession().setAttribute(Constants.LOGIN_USER,loginUserDto);
         responseDto.setContent(loginUserDto);
         return responseDto;
     }
@@ -108,10 +111,12 @@ return responseDto;
     /**
      * 退出
      */
-    @GetMapping("/logout")
-    public ResponseDto logout(HttpServletRequest request) {
+    @GetMapping("/logout/{token}")
+    public ResponseDto logout(@PathVariable String token ) {
         ResponseDto responseDto = new ResponseDto();
-        request.getSession().setAttribute(Constants.LOGIN_USER,null);
+        //request.getSession().setAttribute(Constants.LOGIN_USER,null);
+        redisTemplate.delete(token);
+        LOG.info("从redis中删除token:{}", token);
         return responseDto;
     }
 }

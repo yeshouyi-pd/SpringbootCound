@@ -2,7 +2,10 @@ package com.course.server.dto;
 
 
 public class LoginUserDto {
-
+    /**
+     * 登录 凭证
+     */
+    private String token;
     /**
     * id
     */
@@ -44,8 +47,11 @@ public class LoginUserDto {
     }
 
 
+    public String getToken() {
+        return token;
+    }
 
-
-
-
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
