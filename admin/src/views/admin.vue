@@ -403,7 +403,7 @@
                           </li>
                       </ul>
                   </li>
-                  <li class="">
+                  <li class=""  v-show="hasResource('02')">
                       <a href="#" class="dropdown-toggle">
                           <i class="menu-icon fa fa-list"></i>
                           <span class="menu-text">业务管理</span>
@@ -521,11 +521,22 @@
             _this.activeSidebae(_this.$route.name.replace("/","-")+"-sidebar");
             $.getScript('/ace/assets/js/ace.min.js');
             this.loginUser =Tool.getLoginUser();
+
+            if (!_this.hasResourceRouter(_this.$route.name)) {
+                _this.$router.push("/login");
+            }
         },
         watch:{//监听
             $route:{//监听路由变化 跳转的是 /  只对/  mane 为admin 下的所有只路由有效
                 handler:function (val, oldVal) {
                     let _this = this;
+
+
+                    if (!_this.hasResourceRouter(val.name)) {
+                        _this.$router.push("/login");
+                        return;
+                    }
+
                     _this.$nextTick(function () {//页面加载完后执行
                        _this.activeSidebae(_this.$route.name.replace("/","-")+"-sidebar");
                     })
@@ -562,7 +573,31 @@
                     }
                 })
 
-            }
+            },
+            /**
+             * 查找是否有权限
+             * @param id
+             */
+            hasResource(id) {
+                return Tool.hasResource(id);
+            },
+            /**
+             * 查找是否有权限
+             * @param router
+             */
+            hasResourceRouter(router) {
+                let _this = this;
+                let resources = Tool.getLoginUser().resources;
+                if (Tool.isEmpty(resources)) {
+                    return false;
+                }
+                for (let i = 0; i < resources.length; i++) {
+                    if (router === resources[i].page) {
+                        return true;
+                    }
+                }
+                return false;
+            },
         }
 
     }

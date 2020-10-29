@@ -14,7 +14,7 @@
 
     <pagination ref="pagination" v-bind:list="list" v-bind:itemCount="8"></pagination>
       <div class="row">
-      <div   class="col-md-3 center" v-for="teacher in teachers">
+      <div   class="col-md-3 " v-for="teacher in teachers">
       <div>
 			<span class="profile-picture"  >
                 <img v-bind:title="teacher.intro"  v-show="!teacher.image" class="editable img-responsive editable-click editable-empty"   src="/static/image/profile-pic.jpg" />
