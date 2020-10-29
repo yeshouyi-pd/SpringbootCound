@@ -40,6 +40,6 @@
                              type="XMLMAPPER" />
 
 
-        <table tableName="user" domainObjectName="User"/>
+        <table tableName="resource" domainObjectName="Resource"/>
     </context>
 </generatorConfiguration>
