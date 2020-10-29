@@ -23,6 +23,10 @@ public class UserDto {
      */
     private String password;
 
+    private String deptcode;
+
+    private String rode;
+
     /**
      * 验证码
      */
@@ -81,17 +85,32 @@ public class UserDto {
         this.imageCodeToken = imageCodeToken;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("UserDto{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", loginName='").append(loginName).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", imageCode='").append(imageCode).append('\'');
-        sb.append(", imageCodeToken='").append(imageCodeToken).append('\'');
-        sb.append('}');
-        return sb.toString();
+    public String getDeptcode() {
+        return deptcode;
     }
 
+    public void setDeptcode(String deptcode) {
+        this.deptcode = deptcode;
+    }
+
+    public String getRode() {
+        return rode;
+    }
+
+    public void setRode(String rode) {
+        this.rode = rode;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id='" + id + '\'' +
+                ", loginName='" + loginName + '\'' +
+                ", name='" + name + '\'' +
+                ", deptcode='" + deptcode + '\'' +
+                ", rode='" + rode + '\'' +
+                ", imageCode='" + imageCode + '\'' +
+                ", imageCodeToken='" + imageCodeToken + '\'' +
+                '}';
+    }
 }

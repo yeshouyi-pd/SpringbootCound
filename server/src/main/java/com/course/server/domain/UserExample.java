@@ -383,6 +383,146 @@ public class UserExample {
             addCriterion("`password` not between", value1, value2, "password");
             return (Criteria) this;
         }
+
+        public Criteria andDeptcodeIsNull() {
+            addCriterion("deptcode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeIsNotNull() {
+            addCriterion("deptcode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeEqualTo(String value) {
+            addCriterion("deptcode =", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeNotEqualTo(String value) {
+            addCriterion("deptcode <>", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeGreaterThan(String value) {
+            addCriterion("deptcode >", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeGreaterThanOrEqualTo(String value) {
+            addCriterion("deptcode >=", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeLessThan(String value) {
+            addCriterion("deptcode <", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeLessThanOrEqualTo(String value) {
+            addCriterion("deptcode <=", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeLike(String value) {
+            addCriterion("deptcode like", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeNotLike(String value) {
+            addCriterion("deptcode not like", value, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeIn(List<String> values) {
+            addCriterion("deptcode in", values, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeNotIn(List<String> values) {
+            addCriterion("deptcode not in", values, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeBetween(String value1, String value2) {
+            addCriterion("deptcode between", value1, value2, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptcodeNotBetween(String value1, String value2) {
+            addCriterion("deptcode not between", value1, value2, "deptcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeIsNull() {
+            addCriterion("rode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeIsNotNull() {
+            addCriterion("rode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeEqualTo(String value) {
+            addCriterion("rode =", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeNotEqualTo(String value) {
+            addCriterion("rode <>", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeGreaterThan(String value) {
+            addCriterion("rode >", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeGreaterThanOrEqualTo(String value) {
+            addCriterion("rode >=", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeLessThan(String value) {
+            addCriterion("rode <", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeLessThanOrEqualTo(String value) {
+            addCriterion("rode <=", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeLike(String value) {
+            addCriterion("rode like", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeNotLike(String value) {
+            addCriterion("rode not like", value, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeIn(List<String> values) {
+            addCriterion("rode in", values, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeNotIn(List<String> values) {
+            addCriterion("rode not in", values, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeBetween(String value1, String value2) {
+            addCriterion("rode between", value1, value2, "rode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRodeNotBetween(String value1, String value2) {
+            addCriterion("rode not between", value1, value2, "rode");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -9,6 +9,10 @@ public class User {
 
     private String password;
 
+    private String deptcode;
+
+    private String rode;
+
     public String getId() {
         return id;
     }
@@ -41,6 +45,22 @@ public class User {
         this.password = password;
     }
 
+    public String getDeptcode() {
+        return deptcode;
+    }
+
+    public void setDeptcode(String deptcode) {
+        this.deptcode = deptcode;
+    }
+
+    public String getRode() {
+        return rode;
+    }
+
+    public void setRode(String rode) {
+        this.rode = rode;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -51,6 +71,8 @@ public class User {
         sb.append(", loginName=").append(loginName);
         sb.append(", name=").append(name);
         sb.append(", password=").append(password);
+        sb.append(", deptcode=").append(deptcode);
+        sb.append(", rode=").append(rode);
         sb.append("]");
         return sb.toString();
     }

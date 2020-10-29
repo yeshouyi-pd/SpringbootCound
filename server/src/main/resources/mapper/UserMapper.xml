@@ -6,6 +6,8 @@
     <result column="login_name" jdbcType="VARCHAR" property="loginName" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="CHAR" property="password" />
+    <result column="deptcode" jdbcType="VARCHAR" property="deptcode" />
+    <result column="rode" jdbcType="VARCHAR" property="rode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_name, `name`, `password`
+    id, login_name, `name`, `password`, deptcode, rode
   </sql>
   <select id="selectByExample" parameterType="com.course.server.domain.UserExample" resultMap="BaseResultMap">
     select
@@ -100,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.course.server.domain.User">
     insert into user (id, login_name, `name`, 
-      `password`)
+      `password`, deptcode, rode
+      )
     values (#{id,jdbcType=CHAR}, #{loginName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{password,jdbcType=CHAR})
+      #{password,jdbcType=CHAR}, #{deptcode,jdbcType=VARCHAR}, #{rode,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.course.server.domain.User">
     insert into user
@@ -119,6 +123,12 @@
       <if test="password != null">
         `password`,
       </if>
+      <if test="deptcode != null">
+        deptcode,
+      </if>
+      <if test="rode != null">
+        rode,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +142,12 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=CHAR},
+      </if>
+      <if test="deptcode != null">
+        #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rode != null">
+        #{rode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +172,12 @@
       <if test="record.password != null">
         `password` = #{record.password,jdbcType=CHAR},
       </if>
+      <if test="record.deptcode != null">
+        deptcode = #{record.deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rode != null">
+        rode = #{record.rode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +188,9 @@
     set id = #{record.id,jdbcType=CHAR},
       login_name = #{record.loginName,jdbcType=VARCHAR},
       `name` = #{record.name,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=CHAR}
+      `password` = #{record.password,jdbcType=CHAR},
+      deptcode = #{record.deptcode,jdbcType=VARCHAR},
+      rode = #{record.rode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +207,12 @@
       <if test="password != null">
         `password` = #{password,jdbcType=CHAR},
       </if>
+      <if test="deptcode != null">
+        deptcode = #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rode != null">
+        rode = #{rode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -190,7 +220,9 @@
     update user
     set login_name = #{loginName,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=CHAR}
+      `password` = #{password,jdbcType=CHAR},
+      deptcode = #{deptcode,jdbcType=VARCHAR},
+      rode = #{rode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

@@ -17,20 +17,24 @@
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
-                    <th>id</th>
-            <th>登陆名</th>
-            <th>昵称</th>
-            <th>密码</th>
+        <th>id</th>
+        <th>登陆名</th>
+        <th>昵称</th>
+        <th>密码</th>
         <th>操作</th>
+        <th>部门</th>
+        <th>角色</th>
       </tr>
       </thead>
 
       <tbody>
       <tr v-for="user in users">
-              <td>{{user.id}}</td>
-              <td>{{user.loginName}}</td>
-              <td>{{user.name}}</td>
-              <td>{{user.password}}</td>
+        <td>{{user.id}}</td>
+        <td>{{user.loginName}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.deptcode}}</td>
+        <td>{{user.rode}}</td>
         <td>
           <div class="hidden-sm hidden-xs btn-group">
 
@@ -55,24 +59,36 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label">登陆名</label>
-                      <div class="col-sm-10">
-                        <input v-model="user.loginName"   v-bind:disabled="user.id" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label">昵称</label>
-                      <div class="col-sm-10">
-                        <input v-model="user.name" class="form-control">
-                      </div>
-                    </div>
-                    <div v-show="!user.id"  class="form-group">
-                      <label class="col-sm-2 control-label">密码</label>
-                      <div class="col-sm-10">
-                        <input v-model="user.password" class="form-control">
-                      </div>
-                    </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">登陆名</label>
+                <div class="col-sm-10">
+                  <input v-model="user.loginName"   v-bind:disabled="user.id" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">昵称</label>
+                <div class="col-sm-10">
+                  <input v-model="user.name" class="form-control">
+                </div>
+              </div>
+              <div v-show="!user.id"  class="form-group">
+                <label class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                  <input v-model="user.password" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">部门</label>
+                <div class="col-sm-10">
+                  <input v-model="user.deptcode"   class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">角色</label>
+                <div class="col-sm-10">
+                  <input v-model="user.rode"    class="form-control">
+                </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -92,9 +108,9 @@
     name: "system-user",
     data: function() {
       return {
-      user: {},
-      users: [],
-    }
+        user: {},
+        users: [],
+      }
     },
     mounted: function() {
       let _this = this;
