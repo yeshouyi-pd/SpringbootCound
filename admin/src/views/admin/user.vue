@@ -21,9 +21,9 @@
         <th>登陆名</th>
         <th>昵称</th>
         <th>密码</th>
-        <th>操作</th>
         <th>部门</th>
         <th>角色</th>
+        <th>操作</th>
       </tr>
       </thead>
 
@@ -86,7 +86,10 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">角色</label>
                 <div class="col-sm-10">
-                  <input v-model="user.rode"    class="form-control">
+                  <select v-model="user.rode" class="form-control">
+                    <option v-for="o in roles" v-bind:value="o.id">{{o.name}}</option>
+                  </select>
+
                 </div>
               </div>
             </form>
@@ -110,6 +113,7 @@
       return {
         user: {},
         users: [],
+        roles:[],
       }
     },
     mounted: function() {
@@ -126,7 +130,15 @@
        */
       add() {
         let _this = this;
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/system/admin/role/allroles', {
+        }).then((response)=>{
+          let resp = response.data;
+
+          _this.roles = resp.content;
+
+        })
         _this.user = {};
+
         $("#form-modal").modal("show");
       },
 

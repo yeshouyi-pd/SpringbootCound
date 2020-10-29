@@ -112,4 +112,11 @@ public class RoleService {
         }
         return resourceIdList;
     }
+
+    public List<RoleDto> allroles() {
+
+        RoleExample roleExample = new RoleExample();
+        List<Role> roleList = roleMapper.selectByExample(roleExample);
+        return CopyUtil.copyList(roleList, RoleDto.class);
+    }
 }
