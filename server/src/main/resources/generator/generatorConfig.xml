@@ -40,6 +40,6 @@
                              type="XMLMAPPER" />
 
 
-        <table tableName="role" domainObjectName="Role"/>
+        <table tableName="role_resource" domainObjectName="RoleResource"/>
     </context>
 </generatorConfiguration>
