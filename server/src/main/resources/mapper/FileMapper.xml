@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.course.server.mapper.FileMapper">
-  <resultMap id="BaseResultMap" type="com.course.server.domain.File">
+<mapper namespace="com.pd.server.mapper.FileMapper">
+  <resultMap id="BaseResultMap" type="com.pd.server.domain.File">
     <id column="id" jdbcType="CHAR" property="id" />
     <result column="path" jdbcType="VARCHAR" property="path" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -78,7 +78,7 @@
     id, `path`, `name`, suffix, `size`, `use`, created_at, updated_at, shard_index, shard_size, 
     shard_total, `key`, vod
   </sql>
-  <select id="selectByExample" parameterType="com.course.server.domain.FileExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.pd.server.domain.FileExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -102,13 +102,13 @@
     delete from file
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.course.server.domain.FileExample">
+  <delete id="deleteByExample" parameterType="com.pd.server.domain.FileExample">
     delete from file
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.course.server.domain.File">
+  <insert id="insert" parameterType="com.pd.server.domain.File">
     insert into file (id, `path`, `name`, 
       suffix, `size`, `use`, created_at, 
       updated_at, shard_index, shard_size, 
@@ -118,7 +118,7 @@
       #{updatedAt,jdbcType=TIMESTAMP}, #{shardIndex,jdbcType=INTEGER}, #{shardSize,jdbcType=INTEGER}, 
       #{shardTotal,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, #{vod,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.course.server.domain.File">
+  <insert id="insertSelective" parameterType="com.pd.server.domain.File">
     insert into file
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -203,7 +203,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.course.server.domain.FileExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.pd.server.domain.FileExample" resultType="java.lang.Long">
     select count(*) from file
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -275,7 +275,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.File">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pd.server.domain.File">
     update file
     <set>
       <if test="path != null">
@@ -317,7 +317,7 @@
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.File">
+  <update id="updateByPrimaryKey" parameterType="com.pd.server.domain.File">
     update file
     set `path` = #{path,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
