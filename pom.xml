@@ -18,8 +18,8 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.course</groupId>
-	<artifactId>course</artifactId>
+	<groupId>com.pd</groupId>
+	<artifactId>wx</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>course</name>
 	<description>Demo project for Spring Boot</description>
@@ -59,7 +59,7 @@
 				<version>5.1.37</version>
 			</dependency>
 			<dependency> <!--自定义依赖 -->
-				<groupId>com.course</groupId>
+				<groupId>com.pd</groupId>
 				<artifactId>server</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
